@@ -23,11 +23,11 @@ public class ProcessEndEventHandler implements HistoryEventHandler {
        redisUrls = System.getenv("RedisUrls").split(",");
      }
      redisPassword = System.getenv("RedisPass");
-     gateUrl = System.getenv("SERVER");
-     String username = "camunda";
-     String password = "camunda";
-     if (System.getenv("CAMUNDA_PASSWORD") != null) {
-       password = new String(Base64.getDecoder().decode(System.getenv("CAMUNDA_PASSWORD")));
+     gateUrl = System.getenv("GATE_URL");
+     String username = "rpc";
+     String password = "rpc";
+     if (System.getenv("GATE_PASSWORD") != null) {
+       password = new String(Base64.getDecoder().decode(System.getenv("GATE_PASSWORD")));
        password = password.substring(0, password.length() - 1);
      }
      auth = username + ":" + password;
@@ -60,8 +60,8 @@ public class ProcessEndEventHandler implements HistoryEventHandler {
         Boolean notifyDone = false;
         Jedis jedis;
         if (redisUrls != null) {
-          try {
-            for(int i = 0; i< redisUrls.length; i++) {
+          for(int i = 0; i< redisUrls.length; i++) {
+            try {
               if (redisPassword == null) {
                 jedis = new Jedis("redis://" + redisUrls[i]);
               }
@@ -72,16 +72,15 @@ public class ProcessEndEventHandler implements HistoryEventHandler {
               jedis.quit();
               notifyDone = true;
             }
-          }
-          catch(Exception e) {
-            log.info (e.getMessage());
-            notifyDone = false;
+            catch(Exception e) {
+              log.info (e.getMessage());
+            }
           }
         }
 
         // Using url to make https api call 
         if (! notifyDone && gateUrl != null) {
-          String url = "https://" + gateUrl + "/your-url/" + processId + "/ends?state=" + state;
+          String url = "https://" + gateUrl + "/api/camunda/process/" + processId + "/ends?state=" + state;
           if (! callApi (url, auth)) {
             /* repeat one more time */
             callApi (url, auth);

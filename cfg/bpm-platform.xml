@@ -31,9 +31,23 @@
       <property name="jobExecutorDeploymentAware">false</property>
       <property name="jobExecutorActivate">true</property>
       <property name="jobExecutorPreferTimerJobs">false</property>   
-      <property name="jobExecutorAcquireByDueDate">false</property>   
+      <property name="jobExecutorAcquireByDueDate">false</property> 
+
+      <property name="commandRetries">3</property> 
+
       <property name="tenantCheckEnabled">false</property>
+      <property name="initializeTelemetry">false</property>
+      <property name="telemetryReporterActivate">false</property>
+      <property name="historyCleanupEnabled">true</property>
+      <property name="historyCleanupStrategy">removalTimeBased</property>
       <property name="historyCleanupBatchWindowStartTime">00:01</property>
+      <property name="historyCleanupBatchWindowEndTime">08:00</property>
+      <property name="historyCleanupDegreeOfParallelism">2</property>
+      <property name="historyTimeToLive">P14D</property>
+      <property name="batchOperationHistoryTimeToLive">P14D</property>
+      <property name="historyCleanupJobLogTimeToLive">P90D</property>
+      <property name="taskMetricsEnabled">true</property>
+      <property name="taskMetricsTimeToLive">P90D</property>
     </properties>
 
     <plugins>
@@ -63,9 +77,9 @@
         <properties>
            <property name="administratorUserName">admin</property>
            <property name="administratorPassword">admin</property>
-           <property name="administratorFirstName">Admin</property>
-           <property name="administratorLastName">Admin</property>
-           <property name="administratorEmail">admin@gmail.com</property>
+           <property name="administratorFirstName">Maxim</property>
+           <property name="administratorLastName">Monin</property>
+           <property name="administratorEmail">maximmonin@gmail.com</property>
            <property name="workerUserName">camunda</property>
            <property name="workerPassword">camunda</property>
            <property name="workerFirstName">camunda</property>

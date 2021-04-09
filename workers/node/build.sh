@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo docker build --rm -t camunda-plugins-worker:latest .
+sudo docker build --rm -t camunda-cockroach-worker:latest .

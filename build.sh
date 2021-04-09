@@ -1,6 +1,6 @@
 #!/bin/bash
 cd cfg
-sudo docker build -t camunda-plugins:latest .
+sudo docker build -t camunda-cockroach:latest .
 cd ..
 
 cd workers/node

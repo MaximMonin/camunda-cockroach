@@ -29,7 +29,7 @@ services:
       - "camunda2:$CAMUNDA2"
 
   camunda-engine1:
-    image: camunda-plugins
+    image: camunda-cockroach
     container_name: camunda-cockroach-engine1-$ENVIRONMENT
     hostname: 'camunda-engine1'
     restart: always
@@ -63,7 +63,7 @@ services:
       - "camunda2:$CAMUNDA2"
 
   camunda-engine2:
-    image: camunda-plugins
+    image: camunda-cockroach
     container_name: camunda-cockroach-engine2-$ENVIRONMENT
     hostname: 'camunda-engine2'
     restart: always
@@ -97,7 +97,7 @@ services:
       - "camunda2:$CAMUNDA2"
 
   worker1:
-    image: camunda-plugins-worker
+    image: camunda-cockroach-worker
     container_name: camunda-cockroach-worker1-$ENVIRONMENT
     restart: always
     depends_on:
@@ -134,7 +134,7 @@ services:
       - "camunda2:$CAMUNDA2"
 
   worker2:
-    image: camunda-plugins-worker
+    image: camunda-cockroach-worker
     container_name: camunda-cockroach-worker2-$ENVIRONMENT
     restart: always
     depends_on:
@@ -171,7 +171,7 @@ services:
       - "camunda2:$CAMUNDA2"
 
   db:
-    image: cockroachdb/cockroach:v20.2.5
+    image: cockroachdb/cockroach:v20.2.7
     restart: always
     container_name: camunda-cockroach-db1-$ENVIRONMENT
     hostname: node1
@@ -188,7 +188,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
   db2:
-    image: cockroachdb/cockroach:v20.2.5
+    image: cockroachdb/cockroach:v20.2.7
     restart: always
     container_name: camunda-cockroach-db2-$ENVIRONMENT
     hostname: node2
@@ -202,7 +202,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
 
   db3:
-    image: cockroachdb/cockroach:v20.2.5
+    image: cockroachdb/cockroach:v20.2.7
     restart: always
     container_name: camunda-cockroach-db3-$ENVIRONMENT
     hostname: node3
